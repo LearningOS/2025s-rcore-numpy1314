@@ -1,3 +1,4 @@
+
 //! Implementation of [`FrameAllocator`] which
 //! controls all the frames in the operating system.
 use super::{PhysAddr, PhysPageNum};
@@ -82,6 +83,12 @@ impl FrameAllocator for StackFrameAllocator {
         }
         // recycle
         self.recycled.push(ppn);
+    }
+}
+
+impl StackFrameAllocator {
+    pub fn remain_page_count(&self) -> usize {
+        self.recycled.len() + (self.end - self.current + 1)
     }
 }
 

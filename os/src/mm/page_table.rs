@@ -1,3 +1,4 @@
+
 //! Implementation of [`PageTableEntry`] and [`PageTable`].
 use super::{frame_alloc, FrameTracker, PhysAddr, PhysPageNum, StepByOne, VirtAddr, VirtPageNum};
 use alloc::string::String;
@@ -108,7 +109,7 @@ impl PageTable {
         result
     }
     /// Find PageTableEntry by VirtPageNum
-    fn find_pte(&self, vpn: VirtPageNum) -> Option<&mut PageTableEntry> {
+    pub fn find_pte(&self, vpn: VirtPageNum) -> Option<&mut PageTableEntry> {
         let idxs = vpn.indexes();
         let mut ppn = self.root_ppn;
         let mut result: Option<&mut PageTableEntry> = None;
